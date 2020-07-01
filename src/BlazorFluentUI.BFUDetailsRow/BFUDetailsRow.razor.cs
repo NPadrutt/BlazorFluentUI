@@ -19,9 +19,6 @@ namespace BlazorFluentUI
         [Parameter]
         public bool AnySelected { get; set; }
 
-        //[Parameter]
-        //public bool CanSelect { get; set; }
-
         [Parameter]
         public IEnumerable<BFUDetailsRowColumn<TItem>> Columns { get; set; }
 
@@ -43,25 +40,15 @@ namespace BlazorFluentUI
         [Parameter]
         public bool IsRowHeader { get; set; }
 
-        //[Parameter]
-        //public bool IsSelected { get; set; }
-
         [Parameter]
         public TItem Item { get; set; }
-
-        //[Parameter]
-        //public int ItemIndex { get; set; }
 
         [Parameter]
         public double RowWidth { get; set; } = 0;
 
-        //[Parameter]
-        //public Selection<TItem> Selection { get; set; }
-        //public bool IsSelected { get; set; }
-
         [Parameter]
         public SelectionMode SelectionMode { get; set; }
-        
+
         [Parameter]
         public bool UseFastIcons { get; set; } = true;
 
@@ -82,8 +69,8 @@ namespace BlazorFluentUI
         private void CreateLocalCss()
         {
             _localCheckCoverRule = new Rule();
-            _localCheckCoverRule.Selector = new ClassSelector() { SelectorName = "ms-DetailsRow-checkCover" };            
-            _localCheckCoverRule.Properties = new CssString() { Css = $"position:absolute;top:-1px;left:0;bottom:0;right:0;display:{(AnySelected ? "block" : "none")};" };            
+            _localCheckCoverRule.Selector = new ClassSelector() { SelectorName = "ms-DetailsRow-checkCover" };
+            _localCheckCoverRule.Properties = new CssString() { Css = $"position:absolute;top:-1px;left:0;bottom:0;right:0;display:{(AnySelected ? "block" : "none")};" };
             DetailsRowLocalRules.Add(_localCheckCoverRule);
         }
 
@@ -92,16 +79,7 @@ namespace BlazorFluentUI
         protected override Task OnParametersSetAsync()
         {
             showCheckbox = SelectionMode != SelectionMode.None && CheckboxVisibility != CheckboxVisibility.Hidden;
-
-            canSelect = SelectionMode != SelectionMode.None;//Selection != null;
-
-
-
-            //if (Selection != null)
-            //{
-            //    isSelected = Selection.SelectedItems.Contains(this.Item);
-
-            //}
+            canSelect = SelectionMode != SelectionMode.None;
 
             if (SelectionZone != null)
             {
@@ -125,7 +103,6 @@ namespace BlazorFluentUI
                     }
                 });
             }
-            //CreateCss();
             return base.OnParametersSetAsync();
         }
 
@@ -139,7 +116,6 @@ namespace BlazorFluentUI
 
         public ICollection<IRule> CreateGlobalCss(ITheme theme)
         {
-            //DetailsRowLocalRules.Clear();
             var detailsRowRules = new HashSet<IRule>();
 
             // Root
@@ -177,7 +153,7 @@ namespace BlazorFluentUI
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsRow.is-compact" },
                 Properties = new CssString()
                 {
-                    Css = $"min-height:{CompactRowHeight}px;" + 
+                    Css = $"min-height:{CompactRowHeight}px;" +
                           "border:0px"
                 }
             });
@@ -228,7 +204,7 @@ namespace BlazorFluentUI
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsRow.is-selected" },
                 Properties = new CssString()
                 {
-                    Css = rootSelectedMergeStyleResults.MergeRules + 
+                    Css = rootSelectedMergeStyleResults.MergeRules +
                           $"color:{theme.Palette.NeutralDark};" +
                           $"background:{theme.Palette.NeutralLight};" +
                           $"border-bottom:1px solid {theme.Palette.White};"
@@ -269,7 +245,7 @@ namespace BlazorFluentUI
                           "}" +
                           ".ms-DetailsRow.is-selected:hover .ms-DetailsRow-cell > a {" +
                           $"color:HighlightText;" +
-                          "}" 
+                          "}"
                 }
             });
             detailsRowRules.Add(new Rule()
@@ -337,7 +313,7 @@ namespace BlazorFluentUI
                 Properties = new CssString()
                 {
                     Css = $"overflow:visible;" +
-                          $"white-space:nowrap;" 
+                          $"white-space:nowrap;"
                 }
             });
 
@@ -423,17 +399,6 @@ namespace BlazorFluentUI
                 }
             });
 
-            
-           
-            //DetailsRowGlobalRules.Add(new Rule()
-            //{
-            //    Selector = new CssStringSelector() { SelectorName = ".ms-DetailsRow-cell[data-is-focusable='true']" },
-            //    Properties = new CssString()
-            //    {
-            //        Css = "max-width:100%;"
-            //    }
-            //});
-
             var selectedfocusStyleProps = new FocusStyleProps(theme);
             selectedfocusStyleProps.Inset = -1;
             selectedfocusStyleProps.BorderColor = theme.SemanticColors.FocusBorder;
@@ -517,7 +482,6 @@ namespace BlazorFluentUI
 
         public void Dispose()
         {
-            //Debug.WriteLine("DetailsRow disposed");
         }
     }
 }
