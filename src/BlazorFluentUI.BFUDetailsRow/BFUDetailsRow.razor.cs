@@ -87,7 +87,7 @@ namespace BlazorFluentUI
                 {
                     if (x.Contains(this.Item))
                     {
-                        if (isSelected != true)
+                        if (!isSelected)
                         {
                             isSelected = true;
                             StateHasChanged();
@@ -95,7 +95,7 @@ namespace BlazorFluentUI
                     }
                     else
                     {
-                        if (isSelected != false)
+                        if (isSelected)
                         {
                             isSelected = false;
                             StateHasChanged();
