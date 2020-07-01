@@ -212,7 +212,7 @@ namespace BlazorFluentUI
         {
             _lastViewport = _viewport;
             _viewport = viewport;
-            //Debug.WriteLine($"Viewport changed: {viewport.ScrollWidth}");
+
             if (_viewport != null)
                 AdjustColumns(ItemsSource, LayoutMode, SelectionMode, CheckboxVisibility, Columns, true);
         }

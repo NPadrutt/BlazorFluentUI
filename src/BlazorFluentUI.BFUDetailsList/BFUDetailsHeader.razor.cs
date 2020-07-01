@@ -40,7 +40,7 @@ namespace BlazorFluentUI
 
         [Parameter]
         public IEnumerable<BFUDetailsRowColumn<TItem>> Columns { get; set; }
-               
+
         [Parameter]
         public RenderFragment DetailsCheckboxTemplate { get; set; }
 
@@ -78,7 +78,7 @@ namespace BlazorFluentUI
         public EventCallback<object> OnColumnIsSizingChanged { get; set; }
 
         [Parameter]
-        public EventCallback<ColumnResizedArgs<TItem>> OnColumnResized { get; set; }        
+        public EventCallback<ColumnResizedArgs<TItem>> OnColumnResized { get; set; }
 
         [Parameter]
         public EventCallback<bool> OnToggleCollapsedAll { get; set; }
@@ -114,7 +114,6 @@ namespace BlazorFluentUI
         private bool isResizingColumn;
 
         //state
-        //private bool isAllSelected;
         private bool isAllCollapsed;
         private bool isSizing;
         private int resizeColumnIndex;
@@ -171,7 +170,7 @@ namespace BlazorFluentUI
 
         private void OnToggleCollapseAll(MouseEventArgs mouseEventArgs)
         {
-            
+
         }
 
         private void OnSizerMouseDown(MouseEventArgs args, int colIndex)
@@ -180,15 +179,11 @@ namespace BlazorFluentUI
             resizeColumnIndex = colIndex - (showCheckbox ? 2 : 1);
             resizeColumnOriginX = args.ClientX;
             resizeColumnMinWidth = Columns.ElementAt(resizeColumnIndex).CalculatedWidth;
-            
+
         }
 
         private void OnSizerMouseMove(MouseEventArgs mouseEventArgs)
         {
-            if (mouseEventArgs.ClientX != resizeColumnOriginX)
-            {
-                //OnColumnIsSizingChanged.InvokeAsync();                
-            }
             if (OnColumnResized.HasDelegate)
             {
                 var movement = mouseEventArgs.ClientX - resizeColumnOriginX;
@@ -197,7 +192,7 @@ namespace BlazorFluentUI
                 OnColumnResized.InvokeAsync(new ColumnResizedArgs<TItem>(Columns.ElementAt(resizeColumnIndex), resizeColumnIndex, resizeColumnMinWidth + movement));
 
             }
-            
+
         }
         private void OnSizerMouseUp(MouseEventArgs mouseEventArgs)
         {
@@ -214,7 +209,7 @@ namespace BlazorFluentUI
         {
             var headerRules = new List<IRule>();
 
-            // ROOT           
+            // ROOT
             headerRules.Add(new Rule()
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsHeader" },
@@ -222,7 +217,7 @@ namespace BlazorFluentUI
                 {
                     Css = $"font-size:{theme.FontStyle.FontSize.Small};" +
                           $"font-weight:{theme.FontStyle.FontWeight.Regular};"+
-                          $"display:flex;" +  // inline-block is seeing all the razor whitespace artifacts and adding extra spaces... switched to flex.  
+                          $"display:flex;" +  // inline-block is seeing all the razor whitespace artifacts and adding extra spaces... switched to flex.
                           $"background:{theme.SemanticColors.BodyBackground};" +
                           $"position:relative;" +
                           $"min-width:100%;" +
@@ -297,16 +292,16 @@ namespace BlazorFluentUI
                           $"margin:0;" +
                           $"display:inline-flex;" +
                           $"align-items:center;" +
-                          $"border:none;" 
+                          $"border:none;"
                 }
             });
-            
+
             headerRules.Add(new Rule()
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsHeader.is-allSelected .ms-DetailsHeader-cellIsCheck" },
                 Properties = new CssString()
                 {
-                    Css = $"opacity:1;" 
+                    Css = $"opacity:1;"
                 }
             });
 
@@ -411,7 +406,7 @@ namespace BlazorFluentUI
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsHeader-cellSizerStart" },
                 Properties = new CssString()
                 {
-                    Css = $"margin:0 -8px;" 
+                    Css = $"margin:0 -8px;"
                 }
             });
 
@@ -458,7 +453,7 @@ namespace BlazorFluentUI
                           $"right:0;" +
                           $"bottom:0;" +
                           $"cursor:ew-resize;" +
-                          $"background:rgba(255,255,255,0);" 
+                          $"background:rgba(255,255,255,0);"
                 }
             });
             headerRules.Add(new Rule()
@@ -473,7 +468,7 @@ namespace BlazorFluentUI
                 }
             });
 
-            //accessibleLabel  
+            //accessibleLabel
             headerRules.Add(new Rule()
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsHeader-accessibleLabel" },
@@ -511,7 +506,7 @@ namespace BlazorFluentUI
                 }
             });
 
-            //dropHintCaret 
+            //dropHintCaret
             headerRules.Add(new Rule()
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsHeader-dropHintCaret" },
@@ -528,7 +523,7 @@ namespace BlazorFluentUI
                 }
             });
 
-            //dropHintLine 
+            //dropHintLine
             headerRules.Add(new Rule()
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsHeader-dropHintLine" },
@@ -553,11 +548,11 @@ namespace BlazorFluentUI
                 Properties = new CssString()
                 {
                     Css = $"display:inline-block;" +
-                         $"position:absolute;" 
+                         $"position:absolute;"
                 }
             });
             //NOT DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            // Skipped 
+            // Skipped
 
             return headerRules;
         }
@@ -592,7 +587,7 @@ namespace BlazorFluentUI
             foreach (var rule in focusStyleRules.AddRules)
                 cellStyles.Add(rule);
 
-           
+
             return cellStyles;
         }
     }
