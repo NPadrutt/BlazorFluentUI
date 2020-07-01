@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
@@ -73,8 +72,6 @@ namespace BlazorFluentUI
             _localCheckCoverRule.Properties = new CssString() { Css = $"position:absolute;top:-1px;left:0;bottom:0;right:0;display:{(AnySelected ? "block" : "none")};" };
             DetailsRowLocalRules.Add(_localCheckCoverRule);
         }
-
-
 
         protected override Task OnParametersSetAsync()
         {

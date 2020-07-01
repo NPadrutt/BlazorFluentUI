@@ -100,7 +100,7 @@ namespace BlazorFluentUI
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsColumn.is-empty" },
                 Properties = new CssString()
                 {
-                    Css = $"text-overflow:clip;" 
+                    Css = $"text-overflow:clip;"
                 }
             });
             columnRules.Add(new Rule()
@@ -130,7 +130,7 @@ namespace BlazorFluentUI
                           $"position:absolute;" +
                           $"text-align:left;" +
                           $"color:{theme.Palette.NeutralTertiary};" +
-                          $"left:1px;" 
+                          $"left:1px;"
                 }
             });
 
@@ -142,7 +142,7 @@ namespace BlazorFluentUI
                 {
                     Css = $"color:{theme.SemanticTextColors.BodySubtext};" +
                           $"opacity:1;" +
-                          $"padding-left:8px;" 
+                          $"padding-left:8px;"
                 }
             });
 
@@ -159,18 +159,6 @@ namespace BlazorFluentUI
                           $"top:1px;"
                 }
             });
-
-            ////IconClassName
-            //columnRules.Add(new Rule()
-            //{
-            //    Selector = new CssStringSelector() { SelectorName = ".ms-DetailsColumn-iconClassName" },
-            //    Properties = new CssString()
-            //    {
-            //        Css = $"color:{theme.SemanticTextColors.BodySubtext};" +
-            //              $"opacity:1;" +
-            //              $"padding-left:8px;"
-            //    }
-            //});
 
             //FilterChevron
             columnRules.Add(new Rule()
@@ -194,7 +182,7 @@ namespace BlazorFluentUI
                 Selector = new CssStringSelector() { SelectorName = ".ms-DetailsColumn-cellTitle" },
                 Properties = new CssString()
                 {
-                    Css = cellTitleFocusStyles.MergeRules + 
+                    Css = cellTitleFocusStyles.MergeRules +
                           $"display:flex;" +
                           $"flex-direction:row;" +
                           $"justify-content:flex-start;" +
