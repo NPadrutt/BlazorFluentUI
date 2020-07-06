@@ -13,16 +13,12 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
 {
     public class ContextualMenuItem : BFUComponentBase, IDisposable
     {
-        //[Inject] private IJSRuntime jsRuntime { get; set; }
-
         [Parameter] public string Href { get; set; }
         [Parameter] public string Key { get; set; }
         [Parameter] public string Text { get; set; }
         [Parameter] public string SecondaryText { get; set; }
         [Parameter] public string IconName { get; set; }
         [Parameter] public ContextualMenuItemType ItemType { get; set; }
-
-        //[Parameter] public RenderFragment SubmenuContent { get; set; }
         [Parameter] public IEnumerable<IBFUContextualMenuItem> Items { get; set; }
         [Parameter] public RenderFragment<IBFUContextualMenuItem> ItemTemplate { get; set; }
 
@@ -37,13 +33,9 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
         [Parameter] public ICommand Command { get; set; }
         [Parameter] public object CommandParameter { get; set; }
 
-        //[Parameter] public ContextualMenu ParentContextualMenu { get; set; }
-
-        //[CascadingParameter] public ContextualMenuBase ContextualMenu { get; set; }
         [Parameter] public EventCallback<string> SetSubmenu { get; set; }
-        
+
         [Parameter] public EventCallback<bool> DismissMenu { get; set; }
-        //[Parameter] public EventCallback DismissSubMenu { get; set; }
 
         [Parameter] public string SubmenuActiveKey { get; set; }
 
@@ -54,22 +46,10 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
 
         protected bool isSubMenuOpen = false;
 
-        //private ElementReference linkElementReference;
-        //private List<int> eventHandlerIds;
         private Timer enterTimer = new Timer();
-
-        //[JSInvokable] public void MouseEnterHandler()
-        //{
-        //    //if (ParentContextualMenu.SubmenuActiveKey == this.Key)
-        //    if (isSubMenuOpen)
-        //        return;
-        //    if (!enterTimer.Enabled)
-        //        enterTimer.Start();
-        //}
 
         public void MouseEnterHandler(EventArgs args)
         {
-            //if (ParentContextualMenu.SubmenuActiveKey == this.Key)
             if (isSubMenuOpen)
                 return;
             if (!enterTimer.Enabled)
@@ -79,29 +59,15 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            //if (eventHandlerIds == null)
-            //    eventHandlerIds = await jsRuntime.InvokeAsync<List<int>>("BlazorFluentUiContextualMenu.registerHandlers", this.RootElementReference, DotNetObjectReference.Create(this));
             await base.OnAfterRenderAsync(firstRender);
         }
 
         public void Dispose()
         {
-            //jsRuntime.InvokeAsync<object>("BlazorFluentUiContextualMenu.unregisterHandlers", eventHandlerIds);
         }
 
         public override Task SetParametersAsync(ParameterView parameters)
         {
-
-            //if (IconName != null && parameters.GetValueOrDefault<string>("IconName") == null)
-            //{
-            //    if (ParentContextualMenu != null)
-            //        ParentContextualMenu.HasIconCount--;
-            //}
-            //if (CanCheck && parameters.GetValueOrDefault<bool>("CanCheck") == false)
-            //{
-            //    if (ParentContextualMenu != null)
-            //        ParentContextualMenu.HasCheckable--;
-            //}
             return base.SetParametersAsync(parameters);
         }
 
@@ -111,16 +77,6 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
                 isSubMenuOpen = true;
             else
                 isSubMenuOpen = false;
-            //if (IconName != null)
-            //    ParentContextualMenu.HasIconCount++;
-            //if (CanCheck == true)
-            //    ParentContextualMenu.HasCheckable++;
-
-            //if (!enterTimer.Enabled)
-            //    enterTimer.Interval = ContextualMenu.SubMenuHoverDelay;
-            //if (!enterTimer.Enabled)
-            //    enterTimer.Interval = ContextualMenu.SubMenuHoverDelay;
-
 
             return base.OnParametersSetAsync();
         }
@@ -131,7 +87,6 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
             enterTimer.AutoReset = false;
             enterTimer.Interval = 250; // can't set this in ParametersSetAsync because it resets the countdown after each refresh, which causes another refresh, infinite loop
             enterTimer.Elapsed += EnterTimer_Elapsed;
-            //leaveTimer.Elapsed += LeaveTimer_Elapsed;
             return base.OnInitializedAsync();
         }
 
@@ -141,7 +96,7 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
             if (dismissAll)
             {
                 await DismissMenu.InvokeAsync(true);
-            }    
+            }
         }
 
         private async void KeyDownHandler(KeyboardEventArgs args)
@@ -155,19 +110,6 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
             // send it to the parent ContextualMenu so we can use a left key press to close the menu.
             await OnKeyDown.InvokeAsync(args);
         }
-        
-        //[JSInvokable] 
-        //public async void ClickHandler()
-        //{
-        //    System.Diagnostics.Debug.WriteLine($"ContextualMenuItem called click: {this.Key}");
-
-        //    await this.OnClick.InvokeAsync(new ItemClickedArgs() { MouseEventArgs = new MouseEventArgs(), Key = this.Key });
-        //    this.Command?.Execute(CommandParameter);
-
-        //    if (!CanCheck)
-        //        await this.DismissMenu.InvokeAsync(true);
-        //    //await ParentContextualMenu.OnDismiss.InvokeAsync(true);
-        //}
 
         public async Task ClickHandler(MouseEventArgs args)
         {
@@ -178,13 +120,7 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
 
             if (!CanCheck)
                 await this.DismissMenu.InvokeAsync(true);
-            //await ParentContextualMenu.OnDismiss.InvokeAsync(true);
         }
-
-        //private void LeaveTimer_Elapsed(object sender, ElapsedEventArgs e)
-        //{
-        //    //do nothing for now... eventually
-        //}
 
         private async void EnterTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -193,7 +129,7 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
                 enterTimer.Stop();
 
                 if (Items != null)
-                    SetSubmenu.InvokeAsync(this.Key);  
+                    SetSubmenu.InvokeAsync(this.Key);
                 else
                     SetSubmenu.InvokeAsync(null);
             });
@@ -202,18 +138,18 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             base.BuildRenderTree(builder);
-            if (this.ItemType == ContextualMenuItemType.Divider)
+            if (ItemType == ContextualMenuItemType.Divider)
             {
                 RenderSeparator(builder);
             }
-            else if (this.ItemType == ContextualMenuItemType.Header)
+            else if (ItemType == ContextualMenuItemType.Header)
             {
                 RenderSeparator(builder);
                 RenderHeader(builder);
             }
-            else if (this.ItemType == ContextualMenuItemType.Section)
+            else if (ItemType == ContextualMenuItemType.Section)
             {
-                
+
             }
             else
             {
@@ -243,9 +179,8 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
                 }
                 builder.CloseElement();
             }
-            //builder.AddElementReferenceCapture(15, (element) => RootElementReference = element);
             builder.CloseElement();
-        }      
+        }
 
         private void RenderNormalItem(RenderTreeBuilder builder)
         {
@@ -279,7 +214,6 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
             builder.AddAttribute(22, "href", this.Href);
             builder.AddAttribute(23, "onkeydown", EventCallback.Factory.Create(this, KeyDownHandler));
             builder.AddAttribute(23, "onclick", EventCallback.Factory.Create(this, ()=> this.DismissMenu.InvokeAsync(true)));
-            //builder.AddAttribute(23, "onclick:preventDefault", true);
             builder.AddAttribute(24, "role", "menuitem");
             builder.AddAttribute(25, "class", $"ms-ContextualMenu-link ms-ContextualMenu-anchorLink mediumFont {(Items?.Concat(Items.Where(x => x.Items != null).SelectMany(x => GetChild(x.Items))).FirstOrDefault(x => x.Checked == true) != null ? $" subgroup-is-checked" : "")}");  //the subgroup check is only for NavBar
             builder.AddAttribute(27, "onmouseenter", EventCallback.Factory.Create(this, MouseEnterHandler));
@@ -308,14 +242,13 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
             builder.AddAttribute(26, "class", $"ms-ContextualMenu-link mediumFont {(Items?.Concat(Items.Where(x => x.Items != null).SelectMany(x => GetChild(x.Items))).FirstOrDefault(x => x.Checked == true) != null ? $" subgroup-is-checked" : "")}");  //the subgroup check is only for NavBar
             builder.AddAttribute(27, "onmouseenter", EventCallback.Factory.Create(this, MouseEnterHandler));
             builder.AddAttribute(28, "onmouseenter:preventDefault", true);
-            //builder.AddElementReferenceCapture(29, (linkElement) => linkElementReference = linkElement);  //need this to register mouse events in javascript (not available in Blazor)
 
             RenderMenuItemContent(builder);
 
             builder.CloseElement();
             builder.CloseElement();
         }
-        
+
 
         private void RenderMenuItemContent(RenderTreeBuilder builder)
         {
@@ -333,7 +266,6 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
             {
                 RenderSubMenuIcon(builder);
                 if (isSubMenuOpen)
-                //if (ParentContextualMenu.SubmenuActiveKey == Key)
                     RenderSubContextualMenu(builder);
             }
             builder.CloseElement();
@@ -379,28 +311,17 @@ namespace BlazorFluentUI.BFUContextualMenuInternal
             builder.AddAttribute(67, "IconName", "ChevronRight");  //ignore RTL for now.
             builder.CloseComponent();
         }
-        
+
         private void RenderSubContextualMenu(RenderTreeBuilder builder)
         {
             builder.OpenComponent<BFUContextualMenu>(70);
             builder.AddAttribute(71, "FabricComponentTarget", this);
-            builder.AddAttribute(72, "OnDismiss", EventCallback.Factory.Create<bool>(this, DismissSubMenu));//EventCallback.Factory.Create<bool>(this, (isDismissed) => { ParentContextualMenu.SetSubmenuActiveKey(""); ParentContextualMenu.OnDismiss.InvokeAsync(true); }));
-            //builder.AddAttribute(73, "IsOpen", ParentContextualMenu.SubmenuActiveKey == Key);
+            builder.AddAttribute(72, "OnDismiss", EventCallback.Factory.Create<bool>(this, DismissSubMenu));
             builder.AddAttribute(74, "DirectionalHint", DirectionalHint.RightTopEdge);
             builder.AddAttribute(75, "Items", Items);
             builder.AddAttribute(76, "IsSubMenu", true);
 
-            //builder.AddAttribute(76, "ParentContextualMenu", this.ParentContextualMenu);
-            //builder.AddAttribute(75, "ChildContent", SubmenuContent);
             builder.CloseComponent();
         }
-
-     
-       
-
-       
-
-       
-    
     }
 }
