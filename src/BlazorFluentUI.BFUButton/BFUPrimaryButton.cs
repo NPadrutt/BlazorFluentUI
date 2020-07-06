@@ -73,16 +73,6 @@ namespace BlazorFluentUI
                 }
             });
 
-            //rules.Add(new Rule()
-            //{
-            //    Selector = new CssStringSelector() { SelectorName = ".ms-Button--default.is-disabled" },
-            //    Properties = new CssString()
-            //    {
-            //        Css = $"background-color:{theme.Palette.NeutralLighter};" +
-            //              $"boder-color:{theme.Palette.NeutralLighter};"
-            //    }
-            //});
-
             rules.Add(new Rule()
             {
                 Selector = new CssStringSelector() { SelectorName = "@media screen and (-ms-high-contrast: active)" },
@@ -91,7 +81,7 @@ namespace BlazorFluentUI
                     Css = ".ms-Button--primary{color: Window; background-color:WindowText;-ms-high-contrast-adjust:none;}"+
                           ".ms-Button--primary:hover{color: Window; background-color:Highlight;}"+
                           ".ms-Button--primary:active{color: Window; background-color:WindowText;-ms-high-contrast-adjust:none;}" +
-                          ".ms-Button--primary.is-disabled{color: GrayText; background-color:Window;border-color:GrayText;}" 
+                          ".ms-Button--primary.is-disabled{color: GrayText; background-color:Window;border-color:GrayText;}"
                 }
             });
 

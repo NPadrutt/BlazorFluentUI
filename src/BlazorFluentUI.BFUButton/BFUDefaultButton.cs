@@ -93,8 +93,5 @@ namespace BlazorFluentUI
             base.BuildRenderTree(builder);
             StartRoot(builder, "");
         }
-
-      
-
     }
 }

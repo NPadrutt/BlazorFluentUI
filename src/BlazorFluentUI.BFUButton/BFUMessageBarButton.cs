@@ -25,7 +25,6 @@ namespace BlazorFluentUI
             return rules;
         }
 
-
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
             //base.BuildRenderTree(builder);
@@ -39,6 +38,5 @@ namespace BlazorFluentUI
             StartRoot(builder, "ms-Button--default ms-Button--messageBar");
 
         }
-
     }
 }

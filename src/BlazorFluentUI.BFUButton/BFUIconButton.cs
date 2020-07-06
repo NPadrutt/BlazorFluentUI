@@ -23,7 +23,7 @@ namespace BlazorFluentUI
                           $"color:{theme.SemanticTextColors.Link}"
                 }
             });
-                       
+
             rules.Add(new Rule()
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-Button.ms-Button--icon:hover" },
@@ -61,7 +61,7 @@ namespace BlazorFluentUI
                 Properties = new CssString()
                 {
                     Css = $"background-color:{theme.Palette.NeutralQuaternaryAlt};" +
-                          $"color:{theme.Palette.ThemeDark};" 
+                          $"color:{theme.Palette.ThemeDark};"
                 }
             });
 

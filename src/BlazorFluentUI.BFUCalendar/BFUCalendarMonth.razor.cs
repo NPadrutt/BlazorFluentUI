@@ -24,7 +24,7 @@ namespace BlazorFluentUI
         protected bool IsYearPickerVisible;
         protected bool IsPrevYearInBounds;
         protected bool IsNextYearInBounds;
-        
+
         protected string PreviousYearAriaLabel = "Previous year"; //needs localization!
         protected string NextYearAriaLabel = "Next year"; //needs localization!
 
@@ -49,7 +49,7 @@ namespace BlazorFluentUI
         }
 
         protected override Task OnParametersSetAsync()
-        {            
+        {
             var firstDayOfYear = new DateTime(NavigatedDate.Year, 1, 1);
             IsPrevYearInBounds = DateTime.Compare(MinDate, firstDayOfYear) < 0;
             IsNextYearInBounds = DateTime.Compare(firstDayOfYear.AddYears(1).AddDays(-1), MaxDate) < 0;
@@ -63,14 +63,14 @@ namespace BlazorFluentUI
             return base.OnParametersSetAsync();
         }
 
-        protected Task OnHeaderSelectInternal() 
+        protected Task OnHeaderSelectInternal()
         {
-            if (!YearPickerHidden) 
+            if (!YearPickerHidden)
             {
                 focusOnUpdate = true;
                 IsYearPickerVisible = true;
-            } 
-            else if (OnHeaderSelect.HasDelegate) 
+            }
+            else if (OnHeaderSelect.HasDelegate)
             {
                 return OnHeaderSelect.InvokeAsync(true);
             }

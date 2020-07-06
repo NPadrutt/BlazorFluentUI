@@ -102,27 +102,9 @@ namespace BlazorFluentUI
 
         }
         protected void OnTableMouseUp(MouseEventArgs mouseEventArgs)
-        {   
-            
+        {
+
         }
-
-
-        //protected Task OnDayMouseOver(MouseEventArgs eventArgs)
-        //{
-        //    return Task.CompletedTask;
-        //}
-        //protected Task OnDayMouseLeave(EventArgs eventArgs)
-        //{
-        //    return Task.CompletedTask;
-        //}
-        //protected Task OnDayMouseDown(MouseEventArgs eventArgs)
-        //{
-        //    return Task.CompletedTask;
-        //}
-        //protected Task OnDayMouseUp(MouseEventArgs eventArgs)
-        //{
-        //    return Task.CompletedTask;
-        //}
 
 
         protected string GetDayClasses(DayInfo day)
@@ -167,7 +149,7 @@ namespace BlazorFluentUI
             return classNames;
         }
 
-        private Dictionary<string,string> CreateWeekCornerStyles()
+        private Dictionary<string, string> CreateWeekCornerStyles()
         {
             var weekCornersStyled = new Dictionary<string, string>();
 
@@ -177,7 +159,7 @@ namespace BlazorFluentUI
                     for (var weekIndex = 0; weekIndex < Weeks.Count; weekIndex++)
                     {
                         var week = Weeks[weekIndex];
-                        for (var dayIndex=0; dayIndex < week.Count; dayIndex++)
+                        for (var dayIndex = 0; dayIndex < week.Count; dayIndex++)
                         {
                             bool above = false, below = false, left = false, right = false;
                             var day = week[dayIndex];
@@ -228,7 +210,7 @@ namespace BlazorFluentUI
                     break;
                 case DateRangeType.Week:
                 case DateRangeType.WorkWeek:
-                    for (var weekIndex=0; weekIndex < Weeks.Count; weekIndex++)
+                    for (var weekIndex = 0; weekIndex < Weeks.Count; weekIndex++)
                     {
                         var minIndex = Weeks[weekIndex].IndexOf(Weeks[weekIndex].First(x => x.IsInBounds));
                         var maxIndex = Weeks[weekIndex].IndexOf(Weeks[weekIndex].Last(x => x.IsInBounds));
@@ -309,8 +291,8 @@ namespace BlazorFluentUI
                         IsSelected = IsInDateRangeArray(date, selectedDates),
                         OnSelected = () => OnSelectDateInternal(originalDate),
                         IsInBounds =
-                            (DateTime.Compare(MinDate, date) < 1 ) &&
-                            (DateTime.Compare(date, MaxDate) < 1 ) &&
+                            (DateTime.Compare(MinDate, date) < 1) &&
+                            (DateTime.Compare(date, MaxDate) < 1) &&
                             !GetIsRestrictedDate(date)
                     };
 
@@ -330,10 +312,10 @@ namespace BlazorFluentUI
 
         private bool GetIsRestrictedDate(DateTime date)
         {
-            if (RestrictedDates == null) 
+            if (RestrictedDates == null)
                 return false;
-            
-            if (RestrictedDates.Select(x=>x.Date).Contains(date))
+
+            if (RestrictedDates.Select(x => x.Date).Contains(date))
             {
                 return true;
             }
@@ -342,8 +324,10 @@ namespace BlazorFluentUI
 
         private bool IsInDateRangeArray(DateTime date, List<DateTime> dateRange)
         {
-            foreach (var dateInRange in dateRange) {
-                if (DateTime.Compare(date, dateInRange) == 0) {
+            foreach (var dateInRange in dateRange)
+            {
+                if (DateTime.Compare(date, dateInRange) == 0)
+                {
                     return true;
                 }
             }
@@ -353,15 +337,15 @@ namespace BlazorFluentUI
         private List<DateTime> GetBoundedDateRange(List<DateTime> dateRange, DateTime? minDate = null, DateTime? maxDate = null)
         {
             var boundedDateRange = dateRange;
-            if (minDate.HasValue) {
+            if (minDate.HasValue)
+            {
                 boundedDateRange = boundedDateRange.Where(date => DateTime.Compare(date.Date, minDate.Value) >= 0).ToList();
             }
-            if (maxDate.HasValue) {
+            if (maxDate.HasValue)
+            {
                 boundedDateRange = boundedDateRange.Where(date => DateTime.Compare(date.Date, maxDate.Value) <= 0).ToList();
             }
             return boundedDateRange;
         }
-
-        
-}
+    }
 }

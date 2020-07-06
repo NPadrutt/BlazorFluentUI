@@ -41,7 +41,7 @@ namespace BlazorFluentUI
                 Selector = new CssStringSelector() { SelectorName = ".ms-Button.ms-Button--compound .ms-Button-textContainer" },
                 Properties = new CssString()
                 {
-                    Css = $"text-align:left;" 
+                    Css = $"text-align:left;"
                 }
             });
 
@@ -61,7 +61,7 @@ namespace BlazorFluentUI
                 Selector = new CssStringSelector() { SelectorName = ".ms-Button.ms-Button--compound .ms-Button-description" },
                 Properties = new CssString()
                 {
-                    Css = $"line-height:100%;" 
+                    Css = $"line-height:100%;"
                 }
             });
 
@@ -138,10 +138,6 @@ namespace BlazorFluentUI
 
         protected override void BuildRenderTree(RenderTreeBuilder builder)
         {
-            //base.BuildRenderTree(builder);  
-            // I don't think these base.BuildRenderTree(builder) calls are needed.  In fact, they have the conflicting sequence numbers.
-            // Also, the BaseComponent method has redundant components.  As far as I know, the ComponentBase class has nothing inside the BuildRenderTree method.
-
             builder.OpenComponent<BFUGlobalCS>(0);
             builder.AddAttribute(1, "Component", Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck<System.Object>(this));
             builder.AddAttribute(2, "CreateGlobalCss", new System.Func<ICollection<IRule>>(()=>CreateGlobalCss(Theme)));
@@ -151,8 +147,6 @@ namespace BlazorFluentUI
             builder.OpenComponent<BFUStylePreloader>(4);
             builder.AddAttribute(5, "Component", new BFUPrimaryButton());
             builder.CloseComponent();
-
-            
 
             StartRoot(builder, "ms-Button--compound");
 
