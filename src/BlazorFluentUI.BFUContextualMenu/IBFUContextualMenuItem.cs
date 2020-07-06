@@ -13,7 +13,6 @@ namespace BlazorFluentUI
         object Data { get; set; }
         bool Disabled { get; set; }
         string Href { get; set; }
-        //object IconProps { get; set; }
         string IconName { get; set; }
         ContextualMenuItemType ItemType { get; set; }
         string Key { get; set; }

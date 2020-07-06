@@ -224,10 +224,6 @@ namespace BlazorFluentUI
 
         private IEnumerable<BFUDetailsRowColumn<TItem>> GetAdjustedColumns(IEnumerable<TItem> newItems, DetailsListLayoutMode newLayoutMode, SelectionMode newSelectionMode, CheckboxVisibility newCheckboxVisibility, IEnumerable<BFUDetailsRowColumn<TItem>> newColumns, bool forceUpdate, int resizingColumnIndex)
         {
-            var columns = Columns.EmptyIfNull();
-            var lastWidth = _lastWidth;
-            var lastSelectionMode = _lastSelectionMode;
-
             if (!forceUpdate && _lastViewport.ScrollWidth == _viewport.ScrollWidth && SelectionMode == newSelectionMode && (Columns == null || newColumns == Columns))
                 return Enumerable.Empty<BFUDetailsRowColumn<TItem>>();
 
@@ -258,8 +254,6 @@ namespace BlazorFluentUI
                     _columnOverrides[col.Key] = col.CalculatedWidth;
                 }
             }
-
-
 
             return adjustedColumns;
         }
