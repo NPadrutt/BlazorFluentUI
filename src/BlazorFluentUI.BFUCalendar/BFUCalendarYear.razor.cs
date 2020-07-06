@@ -22,7 +22,6 @@ namespace BlazorFluentUI
         protected string NextYearRangeAriaLabel = "Next year range"; //localize
 
         protected int FromYear;
-        //protected int ToYear;
 
         protected override Task OnParametersSetAsync()
         {

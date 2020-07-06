@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace BlazorFluentUI
@@ -53,7 +52,6 @@ namespace BlazorFluentUI
         private bool isLoaded = false;
         private bool focusOnUpdate = false;
 
-        
         protected override Task OnParametersSetAsync()
         {
             if (!isLoaded)
@@ -115,7 +113,6 @@ namespace BlazorFluentUI
         }
 
         protected async void OnGotoToday(MouseEventArgs args) {
-            
             if (SelectDateOnClick) {
                 // When using Defaultprops, TypeScript doesn't know that React is going to inject defaults
                 // so we use exclamation mark as a hint to the type checker (see link below)
@@ -176,10 +173,6 @@ namespace BlazorFluentUI
                 NavigatedDayDate.Month != Today.Month ||
                 NavigatedMonthDate.Year != Today.Year ||
                 NavigatedMonthDate.Month != Today.Month;
-
-            //StateHasChanged();
-
-            //return Task.CompletedTask;
         }
 
         protected Task OnHeaderSelect(bool focus)

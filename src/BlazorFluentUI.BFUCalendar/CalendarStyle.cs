@@ -363,14 +363,6 @@ namespace BlazorFluentUI
                     Css = $"cursor:pointer;" +
                         $"background-color:{theme.Palette.NeutralLight};" +
                         $"border-radius: 2px;"
-
-                    /*@include high-contrast {
-                        border: 2px solid Highlight;
-
-                        :not(.dayIsToday) span {
-                            color: Highlight;
-                        }
-                    }*/
                 }
             });
 
@@ -378,22 +370,12 @@ namespace BlazorFluentUI
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-Calendar-dayIsHighlighted button.ms-Calendar-dayIsToday" },
                 Properties = new CssString()
-                {
-                    /*@include high-contrast {
-                        border-radius: 100%;
-                    }*/
-                }
             });
 
             MyRules.Add(new Rule()
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-Calendar-dayIsHighlighted button.ms-Calendar-dayIsToday span" },
                 Properties = new CssString()
-                {
-                    /*@include high-contrast {
-                        border-radius: 100%;
-                    }*/
-                }
             });
 
             MyRules.Add(new Rule()
@@ -629,7 +611,6 @@ namespace BlazorFluentUI
                     Css = $"display:inline-flex;" +
                         $"flex-grow:1;" +
                         $"padding:0 5px;" +
-                        /*@include ms-font-m;*/
                         $"font-weight:600;" +
                         $"color:{theme.Palette.NeutralPrimary};" +
                         $"height:28px;" +
@@ -663,7 +644,6 @@ namespace BlazorFluentUI
                         $"cursor:pointer;" +
                         $"float:left;" +
                         $"margin:0 10px 10px 0;" +
-                        /*@include ms-font-s-plus;*/
                         $"color:{theme.Palette.NeutralPrimary};" +
                         $"text-align:center;" +
                         $"border:none;" +
@@ -681,9 +661,6 @@ namespace BlazorFluentUI
                     Css = $"color:{theme.Palette.NeutralDark};" +
                         $"background-color:{theme.Palette.NeutralLighter};" +
                         $"outline: 1px solid transparent;"
-                    /*@include high-contrast {
-                       outline-color: highlight;
-                   }*/
                 }
             });
 
@@ -691,11 +668,6 @@ namespace BlazorFluentUI
             {
                 Selector = new CssStringSelector() { SelectorName = ".ms-Calendar-monthOption:active,.ms-Calendar-yearOption:active" },
                 Properties = new CssString()
-                {
-                    /*@include high-contrast {
-                       outline-color: highlight;
-                   }*/
-                }
             });
 
             MyRules.Add(new Rule()
@@ -727,7 +699,6 @@ namespace BlazorFluentUI
                     Css = $" bottom:0;" +
                         $"color:{theme.Palette.ThemePrimary};" +
                         $"cursor:pointer;" +
-                        /*@include ms-font-s;*/
                         $"color:{theme.Palette.NeutralPrimary};" +
                         $"height:30px;" +
                         $"line-height:30px;" +
@@ -747,9 +718,6 @@ namespace BlazorFluentUI
                 {
                     Css = $"color:{theme.Palette.ThemePrimary};" +
                         $"outline:1px solid transparent;"
-                    /*@include high-contrast {
-                        outline-color: highlight;
-                    }*/
                 }
             });
 
@@ -759,9 +727,6 @@ namespace BlazorFluentUI
                 Properties = new CssString()
                 {
                     Css = $"color:{theme.Palette.ThemeDark};"
-                    /*@include high-contrast {
-                        color: highlight;
-                    }*/
                 }
             });
 
@@ -772,9 +737,6 @@ namespace BlazorFluentUI
                 {
                     Css = $"color:{theme.Palette.NeutralTertiaryAlt};" +
                     $"pointer-events:none;"
-                    /*@include high-contrast {
-                        color: highlight;
-                    }*/
                 }
             });
 
@@ -877,7 +839,6 @@ namespace BlazorFluentUI
                         "}" +
                         ".ms-Calendar.ms-Calendar-goToday {" +
                         "    padding: 0 3px;" +
-                        /*@include ms-right(20px);*/
                         "}" +
                         ".ms-Calendar-showWeekNumbers ms-Calendar-table .ms-Calendar-dayWrapper," +
                         ".ms-Calendar-showWeekNumbers ms-Calendar-table .ms-Calendar-weekday {" +
@@ -1036,9 +997,6 @@ namespace BlazorFluentUI
                 {
                     Css = $"background-color:{theme.Palette.NeutralLighter};" +
                         $"color:{theme.Palette.NeutralDark};"
-                    /*@include high-contrast {
-                        outline: 1px solid highlight;
-                    }*/
                 }
             });
 
@@ -1048,9 +1006,6 @@ namespace BlazorFluentUI
                 Properties = new CssString()
                 {
                     Css = $"background-color:{theme.Palette.NeutralLight};"
-                    /*@include high-contrast {
-                        outline: 1px solid highlight;
-                    }*/
                 }
             });
 
@@ -1070,15 +1025,6 @@ namespace BlazorFluentUI
                 Properties = new CssString()
                 {
                     Css = $"background-color:{theme.Palette.NeutralLight};"
-                    /*@include high-contrast {
-                        color: highlight;
-                        border: 2px solid highlight;
-                        border-radius: 2px;
-
-                        &:hover {
-                            outline: 0 !important;
-                        }
-                    }*/
                 }
             });
 
