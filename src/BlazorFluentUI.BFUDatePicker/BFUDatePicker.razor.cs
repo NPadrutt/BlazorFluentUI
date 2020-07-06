@@ -59,7 +59,6 @@ namespace BlazorFluentUI
         protected string calloutId;
         protected ElementReference datePickerDiv;
         protected BFUTextField textFieldComponent;
-        //protected string id = Guid.NewGuid().ToString(); 
 
         private bool _preventFocusOpeningPicker = false;
         private bool _oldIsDatePickerShown;
@@ -69,7 +68,6 @@ namespace BlazorFluentUI
             ErrorMessage = IsRequired && (Value == DateTime.MinValue) ? IsRequiredErrorMessage : null;
             return base.OnInitializedAsync();
         }
-
 
         public override Task SetParametersAsync(ParameterView parameters)
         {
@@ -101,7 +99,7 @@ namespace BlazorFluentUI
                 return base.SetParametersAsync(parameters);
             }
 
-            this.SetErrorMessage(true, nextIsRequired, nextValue, nextMinDate, nextMaxDate, nextInitialPickerDate);
+            SetErrorMessage(true, nextIsRequired, nextValue, nextMinDate, nextMaxDate, nextInitialPickerDate);
 
             var oldValue = SelectedDate;
             if (DateTime.Compare(oldValue, nextValue) != 0 || (FormatDate != null && nextFormatDate != null && (FormatDate(nextValue) != nextFormatDate(nextValue))))
@@ -156,11 +154,7 @@ namespace BlazorFluentUI
             if (IsDatePickerShown)
             {
                 IsDatePickerShown = false;
-                //InvokeAsync(() =>
-                //{
                 ValidateTextInput();
-                //});
-                //StateHasChanged();
             }
         }
 
@@ -278,7 +272,6 @@ namespace BlazorFluentUI
                                 FormattedDate = FormatDateInternal(date);
                             }
                             ErrorMessage = InvalidInputErrorMessage;
-                            //StateHasChanged();
                         }
                         else
                         {
@@ -286,7 +279,6 @@ namespace BlazorFluentUI
                             if (IsDateOutOfBounds(date, MinDate, MaxDate))
                             {
                                 ErrorMessage = IsOutOfBoundsErrorMessage;
-                                //StateHasChanged();
                             }
                             else
                             {
@@ -329,17 +321,16 @@ namespace BlazorFluentUI
 
         private string SetErrorMessage(bool setState, bool isRequired, DateTime value, DateTime minDate, DateTime maxDate, DateTime initialPickerDate)
         {
-            string errorMessge = (initialPickerDate == DateTime.MinValue) && isRequired && (value == DateTime.MinValue) ? IsRequiredErrorMessage : null;
+            string errorMessage = (initialPickerDate == DateTime.MinValue) && isRequired && (value == DateTime.MinValue) ? IsRequiredErrorMessage : null;
 
-            if (errorMessge == null && value != DateTime.MinValue)
-                errorMessge = IsDateOutOfBounds(value, minDate, maxDate) ? string.Format(IsOutOfBoundsErrorMessage, minDate.Date.ToShortDateString(), maxDate.Date.ToShortDateString()) : null;
+            if (errorMessage == null && value != DateTime.MinValue)
+                errorMessage = IsDateOutOfBounds(value, minDate, maxDate) ? string.Format(IsOutOfBoundsErrorMessage, minDate.Date.ToShortDateString(), maxDate.Date.ToShortDateString()) : null;
 
             if (setState)
             {
-                ErrorMessage = errorMessge;
-                //StateHasChanged();
+                ErrorMessage = errorMessage;
             }
-            return errorMessge;
+            return errorMessage;
         }
 
         private bool IsDateOutOfBounds(DateTime date, DateTime minDate, DateTime maxDate)
