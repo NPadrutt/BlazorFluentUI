@@ -49,14 +49,6 @@ namespace BlazorFluentUI
             GlobalCSRules.Clear();
         }
 
-        //public bool ComponentStyleExist(object component)
-        //{
-        //    if (component == null)
-        //        return false;
-        //    var componentType = component.GetType();
-        //    return GlobalRulesSheets.Any(x => x.Component?.GetType() == componentType);
-        //}
-
         public bool ComponentStyleExist(Type componentType)
         {
             if (componentType == null)
@@ -64,45 +56,25 @@ namespace BlazorFluentUI
             return GlobalRulesSheets.Any(x => x.ComponentType == componentType);
         }
 
-        //public bool StyleSheetIsNeeded(object component)
-        //{
-        //    if (component == null)
-        //        return false;
-        //    var componentType = component.GetType();
-        //    return GlobalCSSheets.Any(x => x.Component?.GetType() == componentType);
-        //}
-
         public bool StyleSheetIsNeeded(Type componentType)
         {
             if (componentType == null)
                 return false;
-            //var componentType = component.GetType();
             return GlobalCSSheets.Any(x => x.ComponentType == componentType);
         }
 
 
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {            
+        {
             if (e.OldItems != null)
             {
                 foreach (var item in e.OldItems)
                 {
-                    //if (!((IGlobalCSSheet)item).FixStyle && ((IGlobalCSSheet)item).Component != null && !StyleSheetIsNeeded(((IGlobalCSSheet)item).Component))
-                    //{
-                    //    GlobalRulesSheets.Remove(GlobalRulesSheets.First(x => x.Component?.GetType() == ((IGlobalCSSheet)item).Component.GetType()));
-                    //    RemoveOneStyleSheet((IGlobalCSSheet)item);
-                    //    GlobalRules.UpdateGlobalRules();
-                    //}
-                    //else if (!((IGlobalCSSheet)item).FixStyle && ((IGlobalCSSheet)item).Component != null && ((IGlobalCSSheet)item).IsGlobal)
-                    //{
-                    //    GlobalCSSheets.First(x => x.Component?.GetType() == ((IGlobalCSSheet)item).Component.GetType()).IsGlobal = true;
-                    //}
                     if (!((IGlobalCSSheet)item).FixStyle && ((IGlobalCSSheet)item).ComponentType != null && !StyleSheetIsNeeded(((IGlobalCSSheet)item).ComponentType))
                     {
                         GlobalRulesSheets.Remove(GlobalRulesSheets.First(x => x.ComponentType == ((IGlobalCSSheet)item).ComponentType));
                         RemoveOneStyleSheet((IGlobalCSSheet)item);
                         GlobalRules?.UpdateGlobalRules();
-                        //Debug.WriteLine($"Removed StyleSheet for {((IGlobalCSSheet)item).ComponentType}");
                     }
                     else if (!((IGlobalCSSheet)item).FixStyle && ((IGlobalCSSheet)item).ComponentType != null && ((IGlobalCSSheet)item).IsGlobal)
                     {
@@ -117,7 +89,6 @@ namespace BlazorFluentUI
                 {
                     if (!ComponentStyleExist(((IGlobalCSSheet)item).ComponentType))
                     {
-                        //Debug.WriteLine($"Added StyleSheet for {((IGlobalCSSheet)item).ComponentType}");
                         GlobalRulesSheets.Add((IGlobalCSSheet)item);
                         ((IGlobalCSSheet)item).IsGlobal = true;
                         AddOneStyleSheet((IGlobalCSSheet)item);
@@ -131,14 +102,12 @@ namespace BlazorFluentUI
         {
             if (globalCSSheet.IsGlobal || globalCSSheet.FixStyle)
                 UpdateGlobalRules();
-            return;
-
         }
 
         private void UpdateGlobalRules()
         {
             var newRules = GetAllGlobalCSRules();
-            if (newRules?.Count > 0)
+            if (newRules.Count > 0)
             {
                 GlobalCSRules.Clear();
                 GlobalCSRules = newRules;
@@ -182,7 +151,7 @@ namespace BlazorFluentUI
             }
         }
 
-        private ICollection<string>? GetAllGlobalCSRules()
+        private ICollection<string> GetAllGlobalCSRules()
         {
             var globalCSRules = new HashSet<string>();
             var update = false;
@@ -217,9 +186,8 @@ namespace BlazorFluentUI
                     }
                 }
             }
-            if (update)
-                return globalCSRules;
-            return null;
+            if (update) return globalCSRules;
+            return new List<string>();
         }
 
         public string PrintRule(IRule rule)
@@ -229,7 +197,7 @@ namespace BlazorFluentUI
             if (rule.Properties == null)
                 return "";
             var ruleAsString = "";
-            
+
             ruleAsString += $"{(rule as Rule)?.Selector?.GetSelectorAsString()}{{";
 
             if (rule.Properties is CssString)
@@ -315,7 +283,7 @@ namespace BlazorFluentUI
             return attribute;
         }
 
-        private static Func<object, object> GetCachedGetter(PropertyInfo property, Dictionary<PropertyInfo, Func<object,object>> cache) 
+        private static Func<object, object> GetCachedGetter(PropertyInfo property, Dictionary<PropertyInfo, Func<object,object>> cache)
         {
             Func<object,object> getter;
             var start = DateTime.Now.Ticks;

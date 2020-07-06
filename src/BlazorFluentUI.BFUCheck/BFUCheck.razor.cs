@@ -43,7 +43,7 @@ namespace BlazorFluentUI
                           $"left:1px;" +
                           $"border-radius:50%;" +
                           $"opacity:1;" +
-                          $"background:{theme.SemanticColors.BodyBackground};" 
+                          $"background:{theme.SemanticColors.BodyBackground};"
                 }
             });
 
@@ -52,7 +52,7 @@ namespace BlazorFluentUI
                 Selector = new CssStringSelector() { SelectorName = ".ms-Check-checkHost:hover .ms-Check, .ms-Check-checkHost:focus .ms-Check, .ms-Check:focus" },
                 Properties = new CssString()
                 {
-                    Css = $"opacity:1;" 
+                    Css = $"opacity:1;"
                 }
             });
 
@@ -78,7 +78,7 @@ namespace BlazorFluentUI
                 }
             });
 
-            //Circle            
+            //Circle
             checkRules.Add(
               new Rule()
               {
@@ -102,7 +102,7 @@ namespace BlazorFluentUI
                   Selector = new CssStringSelector() { SelectorName = ".ms-Check.is-checked .ms-Check-circle" },
                   Properties = new CssString()
                   {
-                      Css = $"color:{theme.Palette.White};" 
+                      Css = $"color:{theme.Palette.White};"
                   }
               });
             checkRules.Add(new Rule()

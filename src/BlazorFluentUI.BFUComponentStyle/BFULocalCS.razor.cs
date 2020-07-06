@@ -44,10 +44,6 @@ namespace BlazorFluentUI
         {
             css = "";
             css = string.Join(string.Empty, Rules.Select(x=>ComponentStyle.PrintRule(x)));
-            //foreach(var rule in rules)
-            //{
-            //    css += ComponentStyle.PrintRule(rule);
-            //}
             base.OnParametersSet();
 
         }

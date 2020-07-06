@@ -19,7 +19,7 @@ namespace BlazorFluentUI
         [Parameter]
         public BoxSide BoxSide { get; set; }
         /// <summary>
-        /// Checked state. Mutually exclusive to "defaultChecked". Use this if you control the checked state at a higher 
+        /// Checked state. Mutually exclusive to "defaultChecked". Use this if you control the checked state at a higher
         /// level and plan to pass in the correct value based on handling onChange events and re-rendering.
         /// </summary>
         [Parameter]
@@ -33,9 +33,9 @@ namespace BlazorFluentUI
         public bool DefaultChecked { get; set; }
 
         /// <summary>
-        /// Optional uncontrolled indeterminate visual state for checkbox. Setting indeterminate state takes visual 
-        /// precedence over checked or defaultChecked props given but does not affect checked state. 
-        /// This is not a toggleable state. On load the checkbox will receive indeterminate visual state and after 
+        /// Optional uncontrolled indeterminate visual state for checkbox. Setting indeterminate state takes visual
+        /// precedence over checked or defaultChecked props given but does not affect checked state.
+        /// This is not a toggleable state. On load the checkbox will receive indeterminate visual state and after
         /// the user's first click it will be removed exposing the true state of the checkbox.
         /// </summary>
         [Parameter]
@@ -48,10 +48,10 @@ namespace BlazorFluentUI
         public bool Disabled { get; set; }
 
         /// <summary>
-        /// Optional controlled indeterminate visual state for checkbox. Setting indeterminate state takes visual 
-        /// precedence over checked or defaultChecked props given but does not affect checked state. 
-        /// This should not be a toggleable state. On load the checkbox will receive indeterminate visual state and after 
-        /// the first user click it should be removed by your supplied 
+        /// Optional controlled indeterminate visual state for checkbox. Setting indeterminate state takes visual
+        /// precedence over checked or defaultChecked props given but does not affect checked state.
+        /// This should not be a toggleable state. On load the checkbox will receive indeterminate visual state and after
+        /// the first user click it should be removed by your supplied
         /// onChange callback function exposing the true state of the checkbox.
         /// </summary>
         [Parameter]
@@ -60,15 +60,9 @@ namespace BlazorFluentUI
         /// <summary>
         /// Label to display next to the checkbox.
         /// </summary>
-        [Parameter]
-        public string Label
-        { get; set; }
-
-
-        [Parameter]
-        public EventCallback<bool> CheckedChanged { get; set; }
-        [Parameter]
-        public EventCallback<bool> IndeterminateChanged { get; set; }
+        [Parameter] public string Label { get; set; }
+        [Parameter] public EventCallback<bool> CheckedChanged { get; set; }
+        [Parameter] public EventCallback<bool> IndeterminateChanged { get; set; }
 
         private string Id = Guid.NewGuid().ToString();
         private bool _isChecked;
@@ -144,7 +138,7 @@ namespace BlazorFluentUI
                 Checked = (bool)args.Value;
             }
             else
-            { 
+            {
                 _isChecked = (bool)args.Value;
             }
 

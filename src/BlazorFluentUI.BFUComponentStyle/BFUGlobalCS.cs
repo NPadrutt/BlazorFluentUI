@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 
 namespace BlazorFluentUI
@@ -13,25 +11,21 @@ namespace BlazorFluentUI
         public IComponentStyle ComponentStyle { get; set; }
 
         private object component;
-        /// <summary>
-        /// P
-        /// </summary>
+
         [Parameter]
         public object Component { get => component; set { component = value; ComponentType = component.GetType(); } }
 
         private Type componentType;
-        /// <summary>
-        /// 
-        /// </su
+
         [Parameter]
-        public Type ComponentType { get => componentType; 
-            set 
+        public Type ComponentType { get => componentType;
+            set
             {
                 if (value.IsGenericType && !value.IsGenericTypeDefinition)
                     componentType = value.GetGenericTypeDefinition();
                 else
                     componentType = value;
-            } 
+            }
         }
 
         /// <summary>

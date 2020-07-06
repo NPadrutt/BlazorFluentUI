@@ -5,13 +5,11 @@ namespace BlazorFluentUI
 {
     public partial class BFUCallout : BFUComponentBase
     {
-        //[Inject] private IComponentContext ComponentContext { get; set; }
         [Inject] private IJSRuntime JSRuntime { get; set; }
 
         [Parameter] public RenderFragment ChildContent { get; set; }
         [Parameter] public ElementReference ElementTarget { get; set; }  // not working yet
         [Parameter] public BFUComponentBase FabricComponentTarget { get; set; }
-
         [Parameter] public DirectionalHint DirectionalHint { get; set; } = DirectionalHint.BottomAutoEdge;
         [Parameter] public bool DirectionalHintFixed { get; set; }
         [Parameter] public bool DoNotLayer { get; set; }
@@ -30,15 +28,10 @@ namespace BlazorFluentUI
         [Parameter] public bool CoverTarget { get; set; } = false;
         [Parameter] public bool AlignTargetEdge { get; set; } = false;
         [Parameter] public string Role { get; set; }
-
         [Parameter] public bool SetInitialFocus { get; set; }
-
-
         [Parameter] public bool HideOverflow { get; set; } = false;
-
         [Parameter] public EventCallback<bool> HiddenChanged { get; set; }
         [Parameter] public EventCallback OnDismiss { get; set; }
         [Parameter] public EventCallback<CalloutPositionedInfo> OnPositioned { get; set; }
-        //protected Layer layerReference;
     }
 }
